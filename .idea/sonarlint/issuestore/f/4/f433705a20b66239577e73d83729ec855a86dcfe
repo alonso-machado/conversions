@@ -1,0 +1,9 @@
+
+=
+java:S2111/"!Use "BigDecimal.valueOf" instead.(ñ ªV8®Ëÿ†»1
+o
+java:S62048"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(¸âœ8°Ëÿ†»1
+Y
+java:S16128"<Replace this lambda with method reference 'Member::getName'.(¸âœ8°Ëÿ†»1
+I
+java:S3011=",This accessibility update should be removed.(´„¢¿8±Ëÿ†»1
