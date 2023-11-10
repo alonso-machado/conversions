@@ -6,7 +6,7 @@ import com.alonso.conversion.model.dto.PurchaseDTOAdmin;
 import com.alonso.conversion.model.entity.Purchase;
 
 // Mapper to Convert to DTO or to Entity
-// Doing this by hand usually get more performance / Memory usage then using ModelMapper or MapStruct
+// Doing this by hand usually get more Performance / Memory usage then using ModelMapper or MapStruct
 public class PurchaseMapper {
 
 	public static Purchase toEntity(PurchaseDTO pDto) {

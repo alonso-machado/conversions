@@ -6,9 +6,7 @@ import com.alonso.conversion.service.PurchaseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,13 +28,14 @@ public class PurchaseController {
 	private PurchaseService service;
 
 	@GetMapping("/")
-	@Operation(summary = "Return all Purchases in the System Paged (Default is 20 per page)")
-	public ResponseEntity<Page<PurchaseDTO>> getAll(@RequestParam(required = false) @PageableDefault(size = 20) Pageable pageable) {
-		return ResponseEntity.ok(service.findAll(pageable));
+	@Operation(summary = "Return all the Purchase Transactions in the System Paged (Default is 20 per page)")
+	public ResponseEntity<Page<PurchaseDTO>> getAll(@RequestParam(required = false, defaultValue = "0") @PositiveOrZero @Valid Integer page,
+	                                                @RequestParam(required = false, defaultValue = "20") @Max(value = 20) @Min(value = 1) @Valid Integer size) {
+		return ResponseEntity.ok(service.findAll(page, size));
 	}
 
 	@PostMapping("/")
-	@Operation(summary = "Add a new Purchase in the System.")
+	@Operation(summary = "Add a new Purchase Transaction in the System.")
 	public ResponseEntity<PurchaseDTO> addPurchase(@Parameter(description = "The description of the Purchase") @Valid @RequestParam String description,
 	                                          @Parameter(description = "The Price of the Purchase", required = true) @RequestParam(defaultValue = "0.0") @Valid Double amount,
 	                                          @Parameter(description = "The Date of the Purchase", required = true) @RequestParam LocalDate purchaseDate) {
@@ -44,21 +43,21 @@ public class PurchaseController {
 	}
 
 	@GetMapping("/{id}")
-	@Operation(summary = "Get the Purchase with that ID.")
+	@Operation(summary = "Get the Purchase Transaction with that ID.")
 	public ResponseEntity<PurchaseDTO> getPurchase(@NotNull @PathVariable Long id) {
-		return ResponseEntity.ok(service.findOne(id));
+		return ResponseEntity.ok(service.findById(id));
 	}
 
 	@PatchMapping("/{id}")
-	@Operation(summary = "Update the specific Purchase in the System.")
+	@Operation(summary = "Update the specific Purchase Transaction in the System.")
 	public ResponseEntity<PurchaseDTO> updatePurchase(@NotNull @PathVariable Long id, @RequestBody Map<String, Object> updatingFields) {
 		return ResponseEntity.ok(service.update(id, updatingFields));
 	}
 
 	@DeleteMapping("/{id}")
-	@Operation(summary = "Delete the Purchase with that ID.")
+	@Operation(summary = "Delete the Purchase Transaction with that ID.")
 	public ResponseEntity<String> deletePost(@NotNull @PathVariable Long id) {
 		service.delete(id);
-		return new ResponseEntity<>("Purchase deleted successfully.", HttpStatus.OK);
+		return new ResponseEntity<>("Purchase Transaction deleted successfully.", HttpStatus.OK);
 	}
 }

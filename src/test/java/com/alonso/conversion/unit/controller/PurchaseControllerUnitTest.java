@@ -30,14 +30,14 @@ public class PurchaseControllerUnitTest {
     }
 
     @Test
-    public void testGetAll() {
+    public void whenGetAll_thenReturnEmptyPage() {
         // Arrange
         Pageable pageable = Pageable.ofSize(20);
         Page<PurchaseDTO> expectedPage = new PageImpl<>(Collections.emptyList(), pageable, 0);
-        when(purchaseService.findAll(pageable)).thenReturn(expectedPage);
+        when(purchaseService.findAll(1,1)).thenReturn(expectedPage);
 
         // Act
-        ResponseEntity<Page<PurchaseDTO>> response = purchaseController.getAll(pageable);
+        ResponseEntity<Page<PurchaseDTO>> response = purchaseController.getAll(1,1);
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -45,11 +45,11 @@ public class PurchaseControllerUnitTest {
     }
 
     @Test
-    public void testGetById() {
+    public void whenGetById_thenReturnPurchase() {
         // Arrange
         long purchaseId = 1L;
         PurchaseDTO expectedPurchase = new PurchaseDTO().builder().id(purchaseId).description("Product 1").amount(10.0).build();
-        when(purchaseService.findOne(purchaseId)).thenReturn(expectedPurchase);
+        when(purchaseService.findById(purchaseId)).thenReturn(expectedPurchase);
 
         // Act
         ResponseEntity<PurchaseDTO> response = purchaseController.getPurchase(purchaseId);
@@ -60,7 +60,7 @@ public class PurchaseControllerUnitTest {
     }
 
     @Test
-    public void testAddPurchase() {
+    public void whenAddPurchase_thenReturnPurchase() {
         // Arrange
         String descriptionTest = "Test Add Purchase";
         Double amount = 12.787543;

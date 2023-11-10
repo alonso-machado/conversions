@@ -1,0 +1,8 @@
+
+	java:S116"`Rename this field "country_currency_desc" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½¨«Æøÿÿÿÿ8ê–º‘»1
+t	java:S116"XRename this field "exchange_rate" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(çğÕ˜8ê–º‘»1
+w	java:S116"[Rename this field "converted_amount" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÉŠ £8ê–º‘»1
+j
+java:S1128"HRemove this unused import 'com.fasterxml.jackson.annotation.JsonFormat'.(ıÙè‹øÿÿÿÿ8ì–º‘»1
+R
+java:S1128"0Remove this unused import 'java.time.LocalDate'.(›‘¬èıÿÿÿÿ8ì–º‘»1

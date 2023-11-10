@@ -74,7 +74,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 		Purchase purchase = Purchase.builder().id(idPurchaseTest).description(descriptionTest).amount(amount).dateTransaction(purchaseDate).dateCreated(LocalDateTime.now()).dateModified(LocalDateTime.now()).build();
 		PurchaseDTOAdmin expectedPurchaseDTOAdmin =
-				PurchaseDTOAdmin.builder().id(idPurchaseTest).description(descriptionTest).amount(amount).dateTransaction(purchaseDate).dateCreated(LocalDateTime.now()).dateModified(LocalDateTime.now()).build();
+				PurchaseDTOAdmin.AdminBuilder().id(idPurchaseTest).description(descriptionTest).amount(amount).dateTransaction(purchaseDate).dateCreated(LocalDateTime.now()).dateModified(LocalDateTime.now()).build();
 		//Act
 		PurchaseDTOAdmin returned = PurchaseMapper.toAdminDto(purchase);
 

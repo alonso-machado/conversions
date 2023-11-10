@@ -5,17 +5,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.data.web.config.EnableSpringDataWebSupport;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.reactive.config.EnableWebFlux;
 
 
 @Configuration
-@EnableSpringDataWebSupport
-@EnableWebMvc
+@EnableWebFlux
 @EnableAspectJAutoProxy
 @EnableJpaAuditing
 @EntityScan(basePackages = {"com.alonso.conversion"})
 @EnableJpaRepositories("com.alonso.conversion")
+//@EnableSpringDataWebSupport
 public class AppConfig {
 
 }

@@ -8,16 +8,16 @@ import java.time.LocalDateTime;
 
 @Setter
 @Getter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PurchaseDTOAdmin {
+public class PurchaseDTOAdmin extends PurchaseDTO{
+	@Builder(builderMethodName = "AdminBuilder")
+	public PurchaseDTOAdmin(Long id, String description, LocalDate dateTransaction, Double amount, LocalDateTime dateCreated, LocalDateTime dateModified) {
+		super(id, description, dateTransaction, amount);
+		this.dateCreated = dateCreated;
+		this.dateModified = dateModified;
+	}
 
-	private Long id;
-	private String description;
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	private LocalDate dateTransaction;
-	private Double amount;
 	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "UTC")
 	private LocalDateTime dateCreated;
 	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "UTC")

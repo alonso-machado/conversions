@@ -5,7 +5,9 @@ import com.alonso.conversion.model.dto.PurchaseDTO;
 import com.alonso.conversion.model.entity.Purchase;
 import com.alonso.conversion.repository.PurchaseRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ReflectionUtils;
@@ -27,17 +29,13 @@ public class PurchaseServiceImpl implements PurchaseService {
 	private PurchaseRepository purchaseRepository;
 
 	@Override
-	public Page<PurchaseDTO> findAll(Pageable pageable) {
-		if(pageable == null){
-			pageable = PageRequest.of(0, 20, Sort.Direction.ASC, "id");
-		} else {
-			pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), pageable.getSort());
-		}
+	public Page<PurchaseDTO> findAll(Integer page, Integer size) {
+		PageRequest pageable = PageRequest.of(page, size, Sort.Direction.ASC, "id");
 		return purchaseRepository.findAll(pageable).map(PurchaseMapper::toDto);
 	}
 
 	@Override
-	public PurchaseDTO findOne(Long id) {
+	public PurchaseDTO findById(Long id) {
 		Purchase purchase = purchaseRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Purchase with this ID does not Exist in our System!"));
 		return PurchaseMapper.toDto(purchase);
 	}
@@ -58,8 +56,12 @@ public class PurchaseServiceImpl implements PurchaseService {
 			updatingFields.forEach((key, value) -> {
 				Field f = ReflectionUtils.findField(Purchase.class, key);
 				if (fieldNames.contains(key)) { //This seems overhead, but it protects again edge cases when PATCH enters with extra / misspelled fields
-					f.setAccessible(true); //To Handle Private Fields
-					ReflectionUtils.setField(f, previous, value);
+					if(key != "dateTransaction") {
+						f.setAccessible(true); //To Handle Private Fields
+						ReflectionUtils.setField(f, previous, value);
+					} else {
+						previous.setDateTransaction(LocalDate.parse(value.toString()));
+					}
 				}
 			});
 			purchaseRepository.save(previous);
