@@ -111,3 +111,5 @@ asrc/test/java/com/alonso/conversion/integration/service/ConversionServiceImplIn
 csrc/test/java/com/alonso/conversion/integration/controller/ConversionControllerIntegrationTest.java,6\f\6fe727bf3a830a47be0ff39b8829135f89bd7d81
 ‘
 asrc/test/java/com/alonso/conversion/integration/controller/PurchaseControllerIntegrationTest.java,2\a\2a572ad1022a5f21350c2bc2ab9dc157f333cb6b
+p
+@src/main/java/com/alonso/conversion/CorsGlobalConfiguration.java,c\6\c6feadf6604a38f3326b8dfac0b9a75078272ce0

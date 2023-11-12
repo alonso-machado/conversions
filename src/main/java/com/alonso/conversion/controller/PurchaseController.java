@@ -37,9 +37,9 @@ public class PurchaseController {
 
 	@PostMapping("/")
 	@Operation(summary = "Add a new Purchase Transaction in the System.")
-	public ResponseEntity<PurchaseDTO> addPurchase(@Parameter(description = "The description of the Purchase") @Valid @RequestParam String description,
-	                                               @Parameter(description = "The Price of the Purchase", required = true) @RequestParam(defaultValue = "0.0") @Valid Double amount,
-	                                               @Parameter(description = "The Date of the Purchase", required = true) @RequestParam LocalDate purchaseDate) {
+	public ResponseEntity<PurchaseDTO> addPurchase(@Parameter(description = "The description of the Purchase Transaction") @Valid @RequestParam String description,
+	                                               @Parameter(description = "The Price of the Purchase Transaction", required = true) @RequestParam(defaultValue = "0.0") @Valid Double amount,
+	                                               @Parameter(description = "The Date of the Purchase Transaction (yyyy-MM-dd)", required = true) @RequestParam LocalDate purchaseDate) {
 		return ResponseEntity.ok(service.addPurchase(description, amount, purchaseDate));
 	}
 

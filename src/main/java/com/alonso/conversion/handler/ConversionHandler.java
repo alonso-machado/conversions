@@ -2,7 +2,7 @@ package com.alonso.conversion.handler;
 
 import com.alonso.conversion.model.dto.ConversionPurchaseDTO;
 import com.alonso.conversion.service.ConversionService;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 @Component
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class ConversionHandler {
 
 	private ConversionService conversionService;
