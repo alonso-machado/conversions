@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ConversionControllerUnitTest {
+class ConversionControllerUnitTest {
 
 	private ConversionController conversionController;
 	private ConversionService conversionService;
@@ -31,7 +31,7 @@ public class ConversionControllerUnitTest {
 	}
 
 	@Test
-	public void whenGetById_thenReturnConversion() {
+	void whenGetById_thenReturnConversion() {
 		// Arrange
 		long purchaseId = 1L;
 		String descriptionTest = "ConversionControllerTestName";

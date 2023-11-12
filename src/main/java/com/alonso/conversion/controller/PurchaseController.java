@@ -6,11 +6,12 @@ import com.alonso.conversion.service.PurchaseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -37,8 +38,8 @@ public class PurchaseController {
 	@PostMapping("/")
 	@Operation(summary = "Add a new Purchase Transaction in the System.")
 	public ResponseEntity<PurchaseDTO> addPurchase(@Parameter(description = "The description of the Purchase") @Valid @RequestParam String description,
-	                                          @Parameter(description = "The Price of the Purchase", required = true) @RequestParam(defaultValue = "0.0") @Valid Double amount,
-	                                          @Parameter(description = "The Date of the Purchase", required = true) @RequestParam LocalDate purchaseDate) {
+	                                               @Parameter(description = "The Price of the Purchase", required = true) @RequestParam(defaultValue = "0.0") @Valid Double amount,
+	                                               @Parameter(description = "The Date of the Purchase", required = true) @RequestParam LocalDate purchaseDate) {
 		return ResponseEntity.ok(service.addPurchase(description, amount, purchaseDate));
 	}
 

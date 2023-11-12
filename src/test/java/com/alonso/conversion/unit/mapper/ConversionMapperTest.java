@@ -16,7 +16,7 @@ import java.util.List;
 
 import static com.alonso.conversion.utils.ConverterUtils.convert;
 
-public class ConversionMapperTest {
+class ConversionMapperTest {
 
     private ConversionMapper conversionMapper;
 
@@ -26,7 +26,7 @@ public class ConversionMapperTest {
     }
 
     @Test
-    public void whenToDtoWithEmptyFiscalDatas_thenReturnConversionPurchaseDTO() {
+    void whenToDtoWithEmptyFiscalDatas_thenReturnConversionPurchaseDTO() {
         String descriptionTest = "MapperTestName";
         Double amount = 15.50;
         LocalDate purchaseTestDate = LocalDate.parse("2023-11-08");
@@ -51,7 +51,7 @@ public class ConversionMapperTest {
     }
 
     @Test
-    public void whenToDtoWithEmptyFiscalDatas_thenReturnException() {
+    void whenToDtoWithEmptyFiscalDatas_thenReturnConversionNotFoundException() {
         String descriptionTest = "TestToDtoWithEmptyFiscalDatas";
         Double amount = 15.15;
         LocalDate purchaseTestDate = LocalDate.parse("2022-11-09");

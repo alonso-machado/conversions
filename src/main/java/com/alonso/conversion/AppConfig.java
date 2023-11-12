@@ -1,6 +1,7 @@
 package com.alonso.conversion;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
@@ -14,6 +15,7 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 @EnableJpaAuditing
 @EntityScan(basePackages = {"com.alonso.conversion"})
 @EnableJpaRepositories("com.alonso.conversion")
+@EnableCaching
 //@EnableSpringDataWebSupport
 public class AppConfig {
 

@@ -1,14 +1,14 @@
 package com.alonso.conversion.unit.utils;
 
 import com.alonso.conversion.utils.ConverterUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class ConverterUtilsTest {
+class ConverterUtilsTest {
 
     @Test
-    public void testConvert() {
+    void testConvert() {
         Double exchangeRate = 1.5;
         Double amountInDollars = 10.0;
         Double expected = 15.0;
@@ -19,7 +19,7 @@ public class ConverterUtilsTest {
     }
 
     @Test
-    public void testRound() {
+    void testRound() {
         Double amount = 15.123;
         Double expected = 15.12;
 

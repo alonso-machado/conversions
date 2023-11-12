@@ -6,8 +6,8 @@ import java.math.RoundingMode;
 public class ConverterUtils {
 
 
-	public static Double convert(Double exchangeRate, Double amountInDolars) {
-		return round(exchangeRate * amountInDolars);
+	public static Double convert(Double exchangeRate, Double amountInDollars) {
+		return round(exchangeRate * amountInDollars);
 	}
 
 	public static Double round(Double amount) {

@@ -90,7 +90,7 @@ public class PurchaseRepositoryUnitTest {
 		Purchase purchaseTest = Purchase.builder().description("RepositoryTestName2").amount(amount).dateTransaction(LocalDate.now()).dateCreated(LocalDateTime.now()).build();
 		purchaseRepository.save(purchaseTest);
 
-		Purchase found = purchaseRepository.findByDescriptionLikeIgnoreCase(purchaseTest.getDescription());
+		Purchase found = purchaseRepository.findByDescriptionLikeIgnoreCase(purchaseTest.getDescription()).get();
 
 		assertThat(found.getDescription()).isEqualTo(purchaseTest.getDescription());
 	}

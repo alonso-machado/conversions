@@ -5,6 +5,11 @@ import com.alonso.conversion.model.dto.PurchaseDTO;
 import com.alonso.conversion.model.entity.Purchase;
 import com.alonso.conversion.repository.PurchaseRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -35,6 +40,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 
 	@Override
+	@Cacheable(key = "#id", cacheNames = "PurchaseCache")
 	public PurchaseDTO findById(Long id) {
 		Purchase purchase = purchaseRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Purchase with this ID does not Exist in our System!"));
 		return PurchaseMapper.toDto(purchase);
@@ -49,6 +55,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 
 	@Override
+	@CachePut(key = "#id", cacheNames = "PurchaseCache")
 	public PurchaseDTO update(Long id, Map<String, Object> updatingFields) {
 		Purchase previous = purchaseRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Purchase with this ID does not Exist in our System! / We will not Update!"));
 		List<String> fieldNames = Arrays.stream(Purchase.class.getDeclaredFields()).map(x -> x.getName()).collect(Collectors.toList());
@@ -72,6 +79,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 
 	@Override
+	@CacheEvict(key = "#id", cacheNames = "PurchaseCache")
 	public void delete(Long id) {
 		Purchase toDelete = purchaseRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Purchase with this ID does not Exist in our System!"));
 		purchaseRepository.delete(toDelete);
@@ -79,7 +87,8 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 	@Override
 	public PurchaseDTO findByDescriptionLikeIgnoreCase(String description){
-		Purchase found = purchaseRepository.findByDescriptionLikeIgnoreCase(description);
+		Purchase found = purchaseRepository.findByDescriptionLikeIgnoreCase(description).orElseThrow(
+				() -> new IllegalArgumentException("Purchase matching this Description does not Exist in our System!"));
 		return PurchaseMapper.toDto(found);
 	}
 }

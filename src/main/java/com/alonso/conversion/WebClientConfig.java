@@ -17,7 +17,6 @@ public class WebClientConfig {
 	@Value("${fiscaldata.base.url}")
 	public String addressBaseUrl;
 
-
 	private HttpClient httpClient = HttpClient.create()
 			.protocol(HttpProtocol.H2C, HttpProtocol.H2, HttpProtocol.HTTP11)
 			.wiretap("reactor.client.ProductWebClient", LogLevel.DEBUG, AdvancedByteBufFormat.TEXTUAL);
@@ -25,7 +24,6 @@ public class WebClientConfig {
 
 	@Bean
 	public WebClient webClient() {
-		//return WebClient.builder().baseUrl(addressBaseUrl).build();
 		return WebClient.builder().clientConnector(new ReactorClientHttpConnector(httpClient)).build();
 	}
 }

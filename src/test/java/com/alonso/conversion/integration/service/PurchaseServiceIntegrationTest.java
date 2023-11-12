@@ -1,9 +1,11 @@
 package com.alonso.conversion.integration.service;
 
+import com.alonso.conversion.exceptions.ConversionNotFoundInPrevious6MonthsException;
 import com.alonso.conversion.model.dto.PurchaseDTO;
 import com.alonso.conversion.repository.PurchaseRepository;
 import com.alonso.conversion.service.PurchaseService;
 import jakarta.validation.ConstraintViolationException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,10 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-/*
-@Profile("prod")
+
+@Profile("test")
 @SpringBootTest
-public class PurchaseServiceIntegrationTest {
+class PurchaseServiceIntegrationTest {
 
 	@Autowired
 	private PurchaseService purchaseService;
@@ -32,9 +34,9 @@ public class PurchaseServiceIntegrationTest {
 	}
 
 	@Test
-	public void whenSave_thenReturnPurchase() {
+	void whenSave_thenReturnPurchase() {
 		//Arrange
-		String descriptionTest = "RepositoryTestName";
+		String descriptionTest = "ServiceSaveTestName";
 		Double amount = 12.787543;
 		Double amountRounded = 12.79;
 		LocalDate purchaseDate = LocalDate.parse("2023-11-08");
@@ -51,58 +53,69 @@ public class PurchaseServiceIntegrationTest {
 	}
 
 	@Test
-	public void whenSaveNegativeAmountInvalid_thenReturnPurchase() {
-		String descriptionTest = "RepositoryTestNegativeAmount";
+	void whenSaveNegativeAmountInvalid_thenReturnConstraintViolationException() {
+		String descriptionTest = "ServiceTestNegativeAmount";
 		Double amount = -5.787543;
+		LocalDate purchaseDate = LocalDate.now();
 
-		assertThat(purchaseService.addPurchase(descriptionTest, amount, LocalDate.now())).isInstanceOfAny(Exception.class);
+		Assertions.assertThrows(ConstraintViolationException.class, () -> {
+			purchaseService.addPurchase(descriptionTest, amount, purchaseDate);
+		});
 	}
 
 	@Test // More than 50 Characters on Description should be Invalid
-	public void whenSaveDescriptionLongInvalid_thenConstraintViolationException() {
-		String descriptionTest = "RepositoryTestDescription1234567890123456789012345678901234567890123456789012345678901234567890";
+	void whenSaveDescriptionLongInvalid_thenReturnConstraintViolationException() {
+		String descriptionTest = "ServiceTestDescription1234567890123456789012345678901234567890123456789012345678901234567890";
 		Double amount = 67.787543;
+		LocalDate purchaseDate = LocalDate.now();
 
-		assertThat(purchaseService.addPurchase(descriptionTest, amount, LocalDate.now())).isInstanceOf(ConstraintViolationException.class);
+		Assertions.assertThrows(ConstraintViolationException.class, () -> {
+			purchaseService.addPurchase(descriptionTest, amount, purchaseDate);
+		});
+
 	}
 
 	@Test
-	public void whenFindById_thenReturnPurchaseDTO() {
+	void whenFindById_thenReturnPurchaseDTO() {
 		//Arrange
-		String descriptionTest = "RepositoryTestName678";
+		String descriptionTest = "ServiceTestName678";
 		Double amount = 10.1678;
 		LocalDate purchaseDate = LocalDate.now();
-		Long idPurchaseTest = 1L;
 		//Save in the DB
-		purchaseService.addPurchase(descriptionTest, amount, purchaseDate);
+		PurchaseDTO saved = purchaseService.addPurchase(descriptionTest, amount, purchaseDate);
 
 		//Act
-		PurchaseDTO found = purchaseService.findById(idPurchaseTest);
+		PurchaseDTO found = purchaseService.findById(saved.getId());
 
 		//Assert
 		assertThat(found.getDescription()).isEqualTo(descriptionTest);
 	}
 
 	@Test
-	public void whenFindByDescriptionLikeIgnoreCase_thenReturnPurchase() {
+	void whenFindByDescriptionLikeIgnoreCase_thenReturnPurchase() {
 		//Arrange
-		String descriptionTest = "RepositoryTestLike";
+		String descriptionTest = "PurchaseServiceTestLike";
 		Double amount = 1863.96724;
+		Double amountRounded = 1863.97;
+		LocalDate purchaseDateTest = LocalDate.now();
 
 		//Act
-		purchaseService.addPurchase(descriptionTest, amount, LocalDate.now());
+		purchaseService.addPurchase(descriptionTest, amount, purchaseDateTest);
 		PurchaseDTO found = purchaseService.findByDescriptionLikeIgnoreCase(descriptionTest);
 
 		assertThat(found.getDescription()).isEqualTo(descriptionTest);
-		assertThat(found.getAmount()).isEqualTo(amount);
+		assertThat(found.getAmount()).isEqualTo(amountRounded);
+		assertThat(found.getDateTransaction()).isEqualTo(purchaseDateTest);
 	}
 
 	@Test
-	public void whenFindByDescriptionLikeIgnoreCaseInexistent_thenReturnException() {
-		String descriptionTest = "RepositoryTestNameInexistent";
+	void whenFindByDescriptionLikeIgnoreCaseInexistent_thenReturnException() {
+		String descriptionTest = "PurchaseServiceTestNameInexistent";
 
-		assertThat(purchaseService.findByDescriptionLikeIgnoreCase(descriptionTest)).isNull();
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			purchaseService.findByDescriptionLikeIgnoreCase(descriptionTest);
+		});
 	}
 
 }
-*/
+

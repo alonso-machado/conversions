@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class PurchaseControllerUnitTest {
+class PurchaseControllerUnitTest {
 
     private PurchaseController purchaseController;
     private PurchaseService purchaseService;
@@ -30,7 +30,7 @@ public class PurchaseControllerUnitTest {
     }
 
     @Test
-    public void whenGetAll_thenReturnEmptyPage() {
+    void whenGetAll_thenReturnEmptyPage() {
         // Arrange
         Pageable pageable = Pageable.ofSize(20);
         Page<PurchaseDTO> expectedPage = new PageImpl<>(Collections.emptyList(), pageable, 0);
@@ -45,7 +45,7 @@ public class PurchaseControllerUnitTest {
     }
 
     @Test
-    public void whenGetById_thenReturnPurchase() {
+    void whenGetById_thenReturnPurchase() {
         // Arrange
         long purchaseId = 1L;
         PurchaseDTO expectedPurchase = new PurchaseDTO().builder().id(purchaseId).description("Product 1").amount(10.0).build();
@@ -60,7 +60,7 @@ public class PurchaseControllerUnitTest {
     }
 
     @Test
-    public void whenAddPurchase_thenReturnPurchase() {
+    void whenAddPurchase_thenReturnPurchase() {
         // Arrange
         String descriptionTest = "Test Add Purchase";
         Double amount = 12.787543;

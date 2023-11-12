@@ -70,11 +70,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 		String descriptionTest = "MapperEntitytoDTOAdmin";
 		Double amount = 21.9965654;
 		LocalDate purchaseDate = LocalDate.parse("2023-11-09");
+		LocalDateTime fakeDateTime = LocalDate.parse("2023-11-10").atStartOfDay();
 		Long idPurchaseTest = 2L;
 
-		Purchase purchase = Purchase.builder().id(idPurchaseTest).description(descriptionTest).amount(amount).dateTransaction(purchaseDate).dateCreated(LocalDateTime.now()).dateModified(LocalDateTime.now()).build();
+		Purchase purchase = Purchase.builder().id(idPurchaseTest).description(descriptionTest).amount(amount).dateTransaction(purchaseDate).dateCreated(fakeDateTime).dateModified(fakeDateTime).build();
 		PurchaseDTOAdmin expectedPurchaseDTOAdmin =
-				PurchaseDTOAdmin.AdminBuilder().id(idPurchaseTest).description(descriptionTest).amount(amount).dateTransaction(purchaseDate).dateCreated(LocalDateTime.now()).dateModified(LocalDateTime.now()).build();
+				PurchaseDTOAdmin.AdminBuilder().id(idPurchaseTest).description(descriptionTest).amount(amount).dateTransaction(purchaseDate).dateCreated(fakeDateTime).dateModified(fakeDateTime).build();
 		//Act
 		PurchaseDTOAdmin returned = PurchaseMapper.toAdminDto(purchase);
 
@@ -87,7 +88,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 				() -> assertEquals(returned.getDateCreated(), expectedPurchaseDTOAdmin.getDateCreated()),
 				() -> assertEquals(returned.getDateModified(), expectedPurchaseDTOAdmin.getDateModified())
 		);
-
 
 	}
 }
