@@ -98,9 +98,6 @@ Dsrc/main/java/com/alonso/conversion/controller/ConversionRouter.java,8\8\88f54
 Ksrc/main/java/com/alonso/conversion/annotation/ConversionRouterApiInfo.java,3\0\30e9a0ca961890da53434eabf19ac9acbb5c9fe8
 f
 6src/main/java/com/alonso/conversion/CachingConfig.java,1\8\18e239a5e04c69f03f462f9cbd01b5ba4dac6af3
-:
-
-Dockerfile,6\6\6651ddff6eb82c840ced7c1dddee15c6e1913dd4
 
 Osrc/test/java/com/alonso/conversion/unit/service/ConversionServiceImplTest.java,3\1\31d9e212c8cd9353c218929bc3aca189a77de5ab
 }
@@ -115,5 +112,3 @@ p
 @src/main/java/com/alonso/conversion/CorsGlobalConfiguration.java,c\6\c6feadf6604a38f3326b8dfac0b9a75078272ce0
 è
 _src/test/java/com/alonso/conversion/integration/controller/ConversionRouterIntegrationTest.java,c\1\c1e5a6213fdd25352aefec2ea7a21760ad6fe8b9
-;
-Dockerfile2,7\a\7ab6b090303fd51a04c4887dcc8c274d691f3413
