@@ -112,3 +112,5 @@ p
 @src/main/java/com/alonso/conversion/CorsGlobalConfiguration.java,c\6\c6feadf6604a38f3326b8dfac0b9a75078272ce0
 
 _src/test/java/com/alonso/conversion/integration/controller/ConversionRouterIntegrationTest.java,c\1\c1e5a6213fdd25352aefec2ea7a21760ad6fe8b9
+>
+env.properties,a\6\a6425f150bd1413a5b371335284973c20a30c9dd
