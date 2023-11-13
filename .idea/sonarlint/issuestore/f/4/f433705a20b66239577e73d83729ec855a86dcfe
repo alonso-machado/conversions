@@ -1,15 +1,0 @@
-
-^
-java:S4973B"<Strings and Boxed types should be compared using "equals()".(çÅĞşÿÿÿÿ8†¼“ü»1
-=
-java:S21113"!Use "BigDecimal.valueOf" instead.(ñ ªV8—¼“ü»1
-o
-java:S6204="RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(¸âœ8™¼“ü»1
-Y
-java:S1612="<Replace this lambda with method reference 'Member::getName'.(¸âœ8š¼“ü»1
-I
-java:S3011C",This accessibility update should be removed.(´„¢¿8›¼“ü»1
-j
-java:S1128"MRemove this unused import 'org.springframework.cache.annotation.CacheConfig'.(şÌÛ¡8šğ‰ı»1
-u
-java:S1128"SRemove this unused import 'org.springframework.data.crossstore.ChangeSetPersister'.(ƒ©¨ùşÿÿÿÿ8šğ‰ı»1
