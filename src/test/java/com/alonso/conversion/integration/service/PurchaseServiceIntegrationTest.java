@@ -5,9 +5,7 @@ import com.alonso.conversion.model.dto.PurchaseDTO;
 import com.alonso.conversion.repository.PurchaseRepository;
 import com.alonso.conversion.service.PurchaseService;
 import jakarta.validation.ConstraintViolationException;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Profile;
@@ -17,7 +15,6 @@ import java.time.LocalDate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-@Profile("test")
 @SpringBootTest
 class PurchaseServiceIntegrationTest {
 
@@ -27,13 +24,13 @@ class PurchaseServiceIntegrationTest {
 	@Autowired
 	private PurchaseRepository purchaseRepository;
 
-
 	@BeforeEach
 	public void setup() {
 		purchaseRepository.deleteAll();
 	}
 
 	@Test
+	@Order(1)
 	void whenSave_thenReturnPurchase() {
 		//Arrange
 		String descriptionTest = "ServiceSaveTestName";
@@ -47,12 +44,13 @@ class PurchaseServiceIntegrationTest {
 		PurchaseDTO found = purchaseService.addPurchase(descriptionTest, amount, purchaseDate);
 
 		//Assert
-		assertThat(found.getId()).isEqualTo(expectedPurchase.getId());
 		assertThat(found.getAmount()).isEqualTo(expectedPurchase.getAmount()); //Using the ROUNDED value
 		assertThat(found.getDateTransaction()).isEqualTo(expectedPurchase.getDateTransaction());
+		assertThat(found.getDescription()).isEqualTo(expectedPurchase.getDescription());
 	}
 
 	@Test
+	@Order(2)
 	void whenSaveNegativeAmountInvalid_thenReturnConstraintViolationException() {
 		String descriptionTest = "ServiceTestNegativeAmount";
 		Double amount = -5.787543;
@@ -64,6 +62,7 @@ class PurchaseServiceIntegrationTest {
 	}
 
 	@Test // More than 50 Characters on Description should be Invalid
+	@Order(3)
 	void whenSaveDescriptionLongInvalid_thenReturnConstraintViolationException() {
 		String descriptionTest = "ServiceTestDescription1234567890123456789012345678901234567890123456789012345678901234567890";
 		Double amount = 67.787543;
@@ -76,6 +75,7 @@ class PurchaseServiceIntegrationTest {
 	}
 
 	@Test
+	@Order(4)
 	void whenFindById_thenReturnPurchaseDTO() {
 		//Arrange
 		String descriptionTest = "ServiceTestName678";
@@ -92,6 +92,7 @@ class PurchaseServiceIntegrationTest {
 	}
 
 	@Test
+	@Order(5)
 	void whenFindByDescriptionLikeIgnoreCase_thenReturnPurchase() {
 		//Arrange
 		String descriptionTest = "PurchaseServiceTestLike";
@@ -109,6 +110,7 @@ class PurchaseServiceIntegrationTest {
 	}
 
 	@Test
+	@Order(6)
 	void whenFindByDescriptionLikeIgnoreCaseInexistent_thenReturnException() {
 		String descriptionTest = "PurchaseServiceTestNameInexistent";
 

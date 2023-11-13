@@ -115,3 +115,5 @@ p
 @src/main/java/com/alonso/conversion/CorsGlobalConfiguration.java,c\6\c6feadf6604a38f3326b8dfac0b9a75078272ce0
 è
 _src/test/java/com/alonso/conversion/integration/controller/ConversionRouterIntegrationTest.java,c\1\c1e5a6213fdd25352aefec2ea7a21760ad6fe8b9
+;
+Dockerfile2,7\a\7ab6b090303fd51a04c4887dcc8c274d691f3413
