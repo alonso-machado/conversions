@@ -1,5 +1,6 @@
 package com.alonso.conversion;
 
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +17,7 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 @EntityScan(basePackages = {"com.alonso.conversion"})
 @EnableJpaRepositories("com.alonso.conversion")
 @EnableCaching
-//@EnableSpringDataWebSupport
+@EnableEncryptableProperties
 public class AppConfig {
 
 }
